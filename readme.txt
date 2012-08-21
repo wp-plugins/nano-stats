@@ -25,8 +25,8 @@ This is an unofficial plugin, not made by the Office of Letters and Light.
 
 == Frequently Asked Questions ==
 
-= Why are there no FAQ? =
-I didn't add them yet.
+= Wat is NaNoWriMo? =
+NaNoWriMo is short for National Novel Writing Month. It is a worldwide contest for (hobby)writers to write 50,000 words in one month, November. For more information, please visit http://nanowrimo.org
 
 == Screenshots ==
 
