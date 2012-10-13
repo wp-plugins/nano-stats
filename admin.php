@@ -31,8 +31,10 @@
 		td#help span.ver_spacer {
 			display: block;
 		}
-		.helpicon {
-			cursor: pointer;
+		
+		table.settings tr td {
+			height:55px;
+			vertical-align:top;
 		}
 		
 		#tabs {
@@ -147,49 +149,46 @@
 			?>
 			<h2>NaNo Stats Options</h2>
 				<br/>
-				<table style="width:100%;" cellspacing="0">
-					<tr>
-						<td style="width:170px;">Default username <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_username()" onmouseout="help_hide_username()"/></td>
+				<table style="width:100%;" cellspacing="0" class="settings">
+					<tr onmouseover="help_show_username()" onmouseout="help_hide_username()">
+						<td style="width:170px;">Default username</td>
 						<td style="width:200px;"><input type="text" name="nanostats_username" value="<?php echo get_option('nanostats_username'); ?>" /></td>
-						<td id="help" rowspan="8">
-							<span id="help_nanostats_username"><span class="ver_spacer" style="height:0;"></span>Unless otherwise specified, this username will be used to show the statistics. When in a WordWar widget less than 2 usernames are given, this one will be added.</span>
-							<span id="help_nanostats_region"><span class="ver_spacer" style="height:30px;"></span>The default region. When in a RegionWar widget less than 2 regions are given, this one will be added.
-								<br/>You can lookup your region by going to <a target="_blank" href="http://nanowrimo.org/en/regions">http://nanowrimo.org/en/regions</a>, click on your region and copy the region from the URL. For example, my region is <a target="_blank" href="http://nanowrimo.org/en/regions/europe-holland-belgium">http://nanowrimo.org/en/regions/europe-holland-belgium</a>, so my region is "europe-holland-belgium".</span>
-							<span id="help_nanostats_width"><span class="ver_spacer" style="height:60px;"></span>In pixels.</span>
-							<span id="help_nanostats_height"><span class="ver_spacer" style="height:90px;"></span>In pixels.</span>
-							<span id="help_nanostats_color_wordcount"><span class="ver_spacer" style="height:120px;"></span>The default color for the wordcount bars. (default: #8888cc)</span>
-							<span id="help_nanostats_color_goal"><span class="ver_spacer" style="height:150px;"></span>The default color for the goal line. (default: #674732)</span>
-							<span id="help_nanostats_color_daily"><span class="ver_spacer" style="height:180px;"></span>The default color for daily words written bars. (default: #000000)</span>
-							<span id="help_nanostats_title"><span class="ver_spacer" style="height:210px;"></span>The title for your graph. Use %u to display the username. Keep empty for no title.</span>
-						</td>
+						<td><span id="help_nanostats_username">Unless otherwise specified, this username will be used to show the statistics. When in a WordWar widget less than 2 usernames are given, this one will be added.</span></td>
 					</tr>
-					<tr>
-						<td>Default region <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_region()" onmouseout="help_hide_region()"/></td>
+					<tr onmouseover="help_show_region()" onmouseout="help_hide_region()">
+						<td>Default region</td>
 						<td><input type="text" name="nanostats_region" value="<?php echo get_option('nanostats_region'); ?>" /></td>
+						<td><span id="help_nanostats_region">The default region. When in a RegionWar widget less than 2 regions are given, this one will be added. You can lookup your region by going to <a target="_blank" href="http://nanowrimo.org/en/regions">http://nanowrimo.org/en/regions</a>, click on your region and copy the region from the URL. For example, my region is <a target="_blank" href="http://nanowrimo.org/en/regions/europe-holland-belgium">http://nanowrimo.org/en/regions/europe-holland-belgium</a>, so my region is "europe-holland-belgium".</span></td>
 					</tr>
-					<tr>
-						<td>Default width <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_width()" onmouseout="help_hide_width()"/></td>
+					<tr onmouseover="help_show_width()" onmouseout="help_hide_width()">
+						<td>Default width</td>
 						<td><input type="text" name="nanostats_width" value="<?php echo get_option('nanostats_width'); ?>" /></td>
+						<td><span id="help_nanostats_width">In pixels.</span></td>
 					</tr>
-					<tr>
-						<td>Default height <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_height()" onmouseout="help_hide_height()"/></td>
+					<tr onmouseover="help_show_height()" onmouseout="help_hide_height()">
+						<td>Default height</td>
 						<td><input type="text" name="nanostats_height" value="<?php echo get_option('nanostats_height'); ?>" /></td>
+						<td><span id="help_nanostats_height">In pixels.</span></td>
 					</tr>
-					<tr>
-						<td>Default WC color <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_color_wordcount()" onmouseout="help_hide_color_wordcount()"/></td>
+					<tr onmouseover="help_show_color_wordcount()" onmouseout="help_hide_color_wordcount()">
+						<td>Default WC color</td>
 						<td><input type="text" name="nanostats_color_wordcount" value="<?php echo get_option('nanostats_color_wordcount'); ?>" /></td>
+						<td><span id="help_nanostats_color_wordcount">The default color for the wordcount bars. (default: #8888cc)</span></td>
 					</tr>
-					<tr>
-						<td>Default goal color <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_color_goal()" onmouseout="help_hide_color_goal()"/></td>
+					<tr onmouseover="help_show_color_goal()" onmouseout="help_hide_color_goal()">
+						<td>Default goal color</td>
 						<td><input type="text" name="nanostats_color_goal" value="<?php echo get_option('nanostats_color_goal'); ?>" /></td>
+						<td><span id="help_nanostats_color_goal">The default color for the goal line. (default: #674732)</span></td>
 					</tr>
-					<tr>
-						<td>Default todays words color <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_color_daily()" onmouseout="help_hide_color_daily()"/></td>
+					<tr onmouseover="help_show_color_daily()" onmouseout="help_hide_color_daily()">
+						<td>Default todays words color</td>
 						<td><input type="text" name="nanostats_color_daily" value="<?php echo get_option('nanostats_color_daily'); ?>" /></td>
+						<td><span id="help_nanostats_color_daily">The default color for daily words written bars. (default: #000000)</span></td>
 					</tr>
-					<tr>
-						<td>Title <img src="../wp-content/plugins/nano-stats/help.gif" class="helpicon" onmouseover="help_show_title()" onmouseout="help_hide_title()"/></td>
+					<tr onmouseover="help_show_title()" onmouseout="help_hide_title()">
+						<td>Title</td>
 						<td><input type="text" name="nanostats_title" value="<?php echo get_option('nanostats_title'); ?>" /></td>
+						<td><span id="help_nanostats_title">The title for your graph. Use %u to display the username. Keep empty for no title.</span></td>
 					</tr>
 				</table>
 				<?php 
