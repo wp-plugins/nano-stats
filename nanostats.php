@@ -3,7 +3,7 @@
 Plugin Name: NaNo Stats
 Plugin URI: http://plugins.camilstaps.nl/plugins/nano-stats/
 Description: Allows you to show your NaNoWriMo Stats in posts, pages and sidebar widgets.
-Version: 1.2.1
+Version: 1.2.4
 Author: Camil Staps
 Author URI: http://camilstaps.nl
 License: GPL2
@@ -158,7 +158,12 @@ function showNaNoStats($atts) {
 	$xmlStr = file_get_contents($xmlUrl);
 	$xmlObj = simplexml_load_string($xmlStr);
 	$nanodata = objectsIntoArray($xmlObj);
-	$data = $nanodata['wordcounts']['wcentry'];
+	$data = $nanodata['wordcounts'];
+	
+	foreach ($data as $dat) {
+		$data2[] = $dat;
+	}
+	$data = $data2;
 	
 	$wordcounts = '';
 	$dailywc = '';
@@ -188,7 +193,7 @@ function showNaNoStats($atts) {
 		
 		# wordcount
 		$wordcounts .= '['.$day.',';
-		if (!$current || date('d')>$day) {
+		if (!$current || date('d')>=$day) {
 			$wordcounts .= $wordcount;
 		} else {
 			$wordcounts .= 0;
