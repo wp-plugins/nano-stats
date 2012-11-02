@@ -3,7 +3,7 @@
 Plugin Name: NaNo Stats
 Plugin URI: http://plugins.camilstaps.nl/plugins/nano-stats/
 Description: Allows you to show your NaNoWriMo Stats in posts, pages and sidebar widgets.
-Version: 1.2.4
+Version: 1.2.5
 Author: Camil Staps
 Author URI: http://camilstaps.nl
 License: GPL2
@@ -155,149 +155,160 @@ function showNaNoStats($atts) {
 	}
 	
 	$xmlUrl = "http://nanowrimo.org/wordcount_api/wchistory/".$username; 
-	$xmlStr = file_get_contents($xmlUrl);
-	$xmlObj = simplexml_load_string($xmlStr);
-	$nanodata = objectsIntoArray($xmlObj);
-	$data = $nanodata['wordcounts'];
-	
-	foreach ($data as $dat) {
-		$data2[] = $dat;
-	}
-	$data = $data2;
-	
-	$wordcounts = '';
-	$dailywc = '';
-	$goals = '';
-	$wordcount = 0;
-	$year = substr($data[0]['wcdate'],0,4);
-	$current = false;
-	if (date('Y-m')==$year.'-11') $current = true;
-	$entry = 0;
-	for ($day=1;$day!=31;$day++) {
-		# dailywc
-		if ($day<10) {
-			$dayFormat = '0'.$day;
-		} else {
-			$dayFormat = $day;
-		}
-		$dailywc .= '['.$day.',';
-		if ($data[$entry]['wcdate'] == $year.'-11-'.$dayFormat) {
-			$wordcount += $data[$entry]['wc'];
-			$dailywc .= $data[$entry]['wc'];
-			$entry++;
-		} else {
-			$dailywc .= 0;
-		}
-		$dailywc .= ']';
-		if ($day!=30) $dailywc .= ',';
-		
-		# wordcount
-		$wordcounts .= '['.$day.',';
-		if (!$current || date('d')>=$day) {
-			$wordcounts .= $wordcount;
-		} else {
-			$wordcounts .= 0;
-		}
-		$wordcounts .= ']';
-		if ($day!=30) $wordcounts .= ',';
-		
-		# goal
-		$goal = round(50000/30*$day);
-		$goals .= '['.$day.','.$goal.']';
-		if ($day!=30) $goals .= ',';
-	}
-	
-	$max = array();
-	if ($showtotals!='false') $max[] = 10000*ceil($wordcount*1.1/10000);
-	if ($showdaily!='false') $max[] = 10000*ceil($data[$entry-1]['wc']*1.1/10000);
-	if ($showgoals!='false') $max[] = 10000*ceil($goal*1.1/10000);
-	$max = max($max);
-	if ($max>10000) $numberTicks = $max/10000 + 1;
-	if ($max<=10000) $numberTicks = $max/1000 + 1;
-	
-	$barWidth = floor(($width-50)/30-8);
-	
-	$showlines = '';
-	if ($showtotals!='false') $showlines .= ',totals';
-	if ($showdaily!='false') $showlines .= ',daily';
-	if ($showgoals!='false') $showlines .= ',goals';
-	$showlines = '['.substr($showlines,1).']';
-	
-	$showcolors = '';
-	if ($showtotals!='false') $showcolors .= ',"'.$wccolor.'"';
-	if ($showdaily!='false') $showcolors .= ',"'.$dailycolor.'"';
-	if ($showgoals!='false') $showcolors .= ',"'.$goalcolor.'"';
-	$showcolors = '['.substr($showcolors,1).']';
-	
-	$showseriesoptions = '';
-	if ($showtotals!='false') $showseriesoptions .= ',{
-							renderer: jQuery.jqplot.BarRenderer,
-							rendererOptions: {
-								barWidth: '.$barWidth.',
-								barPadding: -'.$barWidth.'
-							},
-							highlighter: { formatString: "Day: %s, total: %d" }
-						}';
-	if ($showdaily!='false') $showseriesoptions .= ',{
-							renderer: jQuery.jqplot.BarRenderer,
-							rendererOptions: {
-								barWidth: '.$barWidth.',
-								barPadding: -'.$barWidth.'
-							},
-							highlighter: { formatString: "Day: %s, words written: %d" }
-						}';
-	if ($showgoals!='false') $showseriesoptions .= ',{
-							markerOptions: {
-								size: 0
-							},
-							highlighter: { formatString: "Day: %s, goal: %d", showMarker: true }
-						}';
-	$showseriesoptions = '['.substr($showseriesoptions,1).']';
-	
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('jqplot.min',plugins_url().'/nano-stats/jquery.jqplot.min.js');
-	wp_enqueue_script('jqplot.barRenderer.min',plugins_url().'/nano-stats/jqplot.barRenderer.min.js');
-	wp_enqueue_script('jqplot.categoryAxisRenderer.min',plugins_url().'/nano-stats/jqplot.categoryAxisRenderer.min.js');
-	wp_enqueue_script('jqplot.canvasAxisTickRenderer.min',plugins_url().'/nano-stats/jqplot.canvasAxisTickRenderer.min.js');
-	wp_enqueue_script('jqplot.canvasTextRenderer.min',plugins_url().'/nano-stats/jqplot.canvasTextRenderer.min.js');
-	wp_enqueue_script('jqplot.highlighter.min',plugins_url().'/nano-stats/jqplot.highlighter.min.js');
-	
-    $return = '
-	<link class="include" rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'jquery.jqplot.min.css" />
+    $xmlStr = '';
+    $c = 0;
+    while ($xmlStr=='') {
+        $xmlStr = file_get_contents($xmlUrl);
+        $c++;
+        if ($c==10) $xmlStr == 'NODATA';
+    }
+    if ($xmlStr=='NODATA') {
+        $return = "Couldn't get the statistics for ".$username." from NaNoWriMo.";
+    } else {
+        $xmlObj = simplexml_load_string($xmlStr);
+        $nanodata = objectsIntoArray($xmlObj);
+        $data = $nanodata['wordcounts'];
+        
+        foreach ($data as $dat) {
+            $data2[] = $dat;
+        }
+        $data = $data2;
+        $data = $data[0];
+        
+        $wordcounts = '';
+        $dailywc = '';
+        $goals = '';
+        $wordcount = 0;
+        $year = substr($data[0]['wcdate'],0,4);
+        $current = false;
+        if (date('Y-m')==$year.'-11') $current = true;
+        $entry = 0;
+        for ($day=1;$day!=31;$day++) {
+            # dailywc
+            if ($day<10) {
+                $dayFormat = '0'.$day;
+            } else {
+                $dayFormat = $day;
+            }
+            $dailywc .= '['.$day.',';
+            if (isset($data[$entry]['wcdate']) && $data[$entry]['wcdate'] == $year.'-11-'.$dayFormat) {
+                $wordcount += $data[$entry]['wc'];
+                $dailywc .= $data[$entry]['wc'];
+                $entry++;
+            } else {
+                $dailywc .= 0;
+            }
+            $dailywc .= ']';
+            if ($day!=30) $dailywc .= ',';
+            
+            # wordcount
+            $wordcounts .= '['.$day.',';
+            if (!$current || date('d')>=$day) {
+                $wordcounts .= $wordcount;
+            } else {
+                $wordcounts .= 0;
+            }
+            $wordcounts .= ']';
+            if ($day!=30) $wordcounts .= ',';
+            
+            # goal
+            $goal = round(50000/30*$day);
+            $goals .= '['.$day.','.$goal.']';
+            if ($day!=30) $goals .= ',';
+        }
+        
+        $max = array();
+        if ($showtotals!='false') $max[] = 10000*ceil($wordcount*1.1/10000);
+        if ($showdaily!='false') $max[] = 10000*ceil($data[$entry-1]['wc']*1.1/10000);
+        if ($showgoals!='false') $max[] = 10000*ceil($goal*1.1/10000);
+        $max = max($max);
+        if ($max>10000) $numberTicks = $max/10000 + 1;
+        if ($max<=10000) $numberTicks = $max/1000 + 1;
+        
+        $barWidth = floor(($width-50)/30-8);
+        
+        $showlines = '';
+        if ($showtotals!='false') $showlines .= ',totals';
+        if ($showdaily!='false') $showlines .= ',daily';
+        if ($showgoals!='false') $showlines .= ',goals';
+        $showlines = '['.substr($showlines,1).']';
+        
+        $showcolors = '';
+        if ($showtotals!='false') $showcolors .= ',"'.$wccolor.'"';
+        if ($showdaily!='false') $showcolors .= ',"'.$dailycolor.'"';
+        if ($showgoals!='false') $showcolors .= ',"'.$goalcolor.'"';
+        $showcolors = '['.substr($showcolors,1).']';
+        
+        $showseriesoptions = '';
+        if ($showtotals!='false') $showseriesoptions .= ',{
+                                renderer: jQuery.jqplot.BarRenderer,
+                                rendererOptions: {
+                                    barWidth: '.$barWidth.',
+                                    barPadding: -'.$barWidth.'
+                                },
+                                highlighter: { formatString: "Day: %s, total: %d" }
+                            }';
+        if ($showdaily!='false') $showseriesoptions .= ',{
+                                renderer: jQuery.jqplot.BarRenderer,
+                                rendererOptions: {
+                                    barWidth: '.$barWidth.',
+                                    barPadding: -'.$barWidth.'
+                                },
+                                highlighter: { formatString: "Day: %s, words written: %d" }
+                            }';
+        if ($showgoals!='false') $showseriesoptions .= ',{
+                                markerOptions: {
+                                    size: 0
+                                },
+                                highlighter: { formatString: "Day: %s, goal: %d", showMarker: true }
+                            }';
+        $showseriesoptions = '['.substr($showseriesoptions,1).']';
+        
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('jqplot.min',plugins_url().'/nano-stats/jquery.jqplot.min.js');
+        wp_enqueue_script('jqplot.barRenderer.min',plugins_url().'/nano-stats/jqplot.barRenderer.min.js');
+        wp_enqueue_script('jqplot.categoryAxisRenderer.min',plugins_url().'/nano-stats/jqplot.categoryAxisRenderer.min.js');
+        wp_enqueue_script('jqplot.canvasAxisTickRenderer.min',plugins_url().'/nano-stats/jqplot.canvasAxisTickRenderer.min.js');
+        wp_enqueue_script('jqplot.canvasTextRenderer.min',plugins_url().'/nano-stats/jqplot.canvasTextRenderer.min.js');
+        wp_enqueue_script('jqplot.highlighter.min',plugins_url().'/nano-stats/jqplot.highlighter.min.js');
+        
+        $return = '
+        <link class="include" rel="stylesheet" type="text/css" href="'.plugin_dir_url(__FILE__).'jquery.jqplot.min.css" />
 
-    <div id="nanostats-'.$nStats.'" style="width:'.$width.'px; height:'.$height.'px;"></div>
-	<script class="code" type="text/javascript">
-		jQuery(document).ready(function(){
-			var daily = ['.$dailywc.'];
-			var totals = ['.$wordcounts.'];
-			var goals = ['.$goals.'];
-			
-			var plot1 = jQuery.jqplot(\'nanostats-'.$nStats.'\', '.$showlines.', {
-				highlighter: {
-					show: true,
-					showMarker: false
-				},
-				seriesColors: '.$showcolors.',
-				series:'.$showseriesoptions.',
-				title: {
-					text: "'.$title.'",
-					show: '.$showtitle.'
-				},
-				axes: {
-					xaxis: {
-						renderer: jQuery.jqplot.CategoryAxisRenderer
-					},
-					yaxis: {
-						min: 0,
-						max: '.$max.',
-						numberTicks: '.$numberTicks.',
-						tickOptions: {formatString: \'%d\'}
-					}
-				}
-			});
-		});
-	</script>';
-	$nStats++;
+        <div id="nanostats-'.$nStats.'" style="width:'.$width.'px; height:'.$height.'px;"></div>
+        <script class="code" type="text/javascript">
+            jQuery(document).ready(function(){
+                var daily = ['.$dailywc.'];
+                var totals = ['.$wordcounts.'];
+                var goals = ['.$goals.'];
+                
+                var plot1 = jQuery.jqplot(\'nanostats-'.$nStats.'\', '.$showlines.', {
+                    highlighter: {
+                        show: true,
+                        showMarker: false
+                    },
+                    seriesColors: '.$showcolors.',
+                    series:'.$showseriesoptions.',
+                    title: {
+                        text: "'.$title.'",
+                        show: '.$showtitle.'
+                    },
+                    axes: {
+                        xaxis: {
+                            renderer: jQuery.jqplot.CategoryAxisRenderer
+                        },
+                        yaxis: {
+                            min: 0,
+                            max: '.$max.',
+                            numberTicks: '.$numberTicks.',
+                            tickOptions: {formatString: \'%d\'}
+                        }
+                    }
+                });
+            });
+        </script>';
+        $nStats++;
+    }
 	return $return;
 }
 
