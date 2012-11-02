@@ -4,7 +4,7 @@ Tags: nanowrimo, statistics, nano, stats, wrimo
 Donate link: http://plugins.camilstaps.nl/donate
 Requires at least: 2.5
 Tested up to: 3.4.1
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,9 @@ NaNoWriMo is short for National Novel Writing Month. It is a worldwide contest f
 2. The settings page is clear and simple.
 
 == Changelog ==
+
+= 1.2.4 =
+* Another bug fix - sorry for the many updates; as this is a plugin dedicated for November, it's quite hard testing. Thanks for your understanding!
 
 = 1.2.3 =
 * Bug fix.
