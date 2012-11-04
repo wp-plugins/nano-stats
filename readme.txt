@@ -39,7 +39,8 @@ I'm afraid this is not an issue of the plugin but of http://nanowrimo.org. Durin
 == Changelog ==
 
 = 1.2.6 =
-* Minor improvement.
+* Minor improvement. 
+* Updated the FAQ.
 
 = 1.2.5 =
 * Bug fixes. Sorry for the inconvenience. 
