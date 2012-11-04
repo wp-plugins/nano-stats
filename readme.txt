@@ -4,7 +4,7 @@ Tags: nanowrimo, statistics, nano, stats, wrimo
 Donate link: http://plugins.camilstaps.nl/donate
 Requires at least: 2.5
 Tested up to: 3.4.1
-Stable tag: 1.2.2
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,10 @@ This is an unofficial plugin, not made by the Office of Letters and Light.
 == Frequently Asked Questions ==
 
 = What is NaNoWriMo? =
-NaNoWriMo is short for National Novel Writing Month. It is a worldwide contest for (hobby)writers to write 50,000 words in one month, November. For more information, please visit http://nanowrimo.org
+NaNoWriMo is short for National Novel Writing Month. It is a worldwide contest for (hobby)writers to write 50,000 words in one month, November. For more information, please visit http://nanowrimo.org.
+
+= My charts and widgets are loading slowly. What can be done about this? =
+I'm afraid this is not an issue of the plugin but of http://nanowrimo.org. During November, this site gets a huge load of data traffic, which causes it to shutdown quiet often during this month. There is nothing that can be done about this, except improving the NaNoWriMo servers.
 
 == Screenshots ==
 
@@ -34,6 +37,18 @@ NaNoWriMo is short for National Novel Writing Month. It is a worldwide contest f
 2. The settings page is clear and simple.
 
 == Changelog ==
+
+= 1.2.6 =
+* Minor improvement.
+
+= 1.2.5 =
+* Bug fixes. Sorry for the inconvenience. 
+
+= 1.2.4 =
+* Another bug fix - sorry for the many updates; as this is a plugin dedicated for November, it's quite hard testing. Thanks for your understanding!
+
+= 1.2.3 =
+* Bug fix.
 
 = 1.2.2 =
 * Minor improvement on the settings page.
