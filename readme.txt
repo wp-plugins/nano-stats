@@ -4,7 +4,7 @@ Tags: nanowrimo, statistics, nano, stats, wrimo
 Donate link: http://plugins.camilstaps.nl/donate
 Requires at least: 2.5
 Tested up to: 3.4.1
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,9 @@ I'm afraid this is not an issue of the plugin but of http://nanowrimo.org. Durin
 2. The settings page is clear and simple.
 
 == Changelog ==
+
+= 1.2.7 =
+* Updated all author links
 
 = 1.2.6 =
 * Minor improvement. 
