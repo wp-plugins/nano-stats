@@ -202,7 +202,7 @@
 				?>
 			</form>
 			<br/>
-			To get help on this page, view: <a href="http://wordpress.camilstaps.nl/plugins/nano-stats/the-settings-page" target="_blank">Documenation: The Settings Page</a>.
+			To get help on this page, view: <a href="http://wordpress.camilstaps.nl/plugins/nano-stats/the-settings-page" target="_blank">Documentation: The Settings Page</a>.
 		</div>
 		<div id="docs">
 			<h2>Documentation</h2>
