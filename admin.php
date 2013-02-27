@@ -202,12 +202,12 @@
 				?>
 			</form>
 			<br/>
-			To get help on this page, view: <a href="http://plugins.camilstaps.nl/plugins/nano-stats/the-settings-page" target="_blank">Documenation: The Settings Page</a>.
+			To get help on this page, view: <a href="http://wordpress.camilstaps.nl/plugins/nano-stats/the-settings-page" target="_blank">Documenation: The Settings Page</a>.
 		</div>
 		<div id="docs">
 			<h2>Documentation</h2>
 			<br/>
-			You can either have a look at <a href="http://plugins.camilstaps.nl/plugins/nano-stats">this online documentation</a> with examples and other nice stuff, or lookup something in the summary below:
+			You can either have a look at <a href="http://wordpress.camilstaps.nl/plugins/nano-stats">this online documentation</a> with examples and other nice stuff, or lookup something in the summary below:
 			<br/>
 			<h3>NaNoWriMo Stats</h3>
 			Adding <pre>[nanostats]</pre> to a post, page or sidebar widget will include your NaNoWriMo stats! 
@@ -273,12 +273,12 @@
 		<div id="support">
 			<h2>Support</h2>
 			<br/>
-			For support, please have a look at <a href="http://plugins.camilstaps.nl/support/" target="_blank">http://plugins.camilstaps.nl/support/</a>.
+			For support, please have a look at <a href="http://wordpress.camilstaps.nl/support/" target="_blank">http://wordpress.camilstaps.nl/support/</a>.
 		</div>
 		<div id="donate">
 			<h2>Donate</h2>
 			<br/>
-			For the options to donate, see <a href="http://plugins.camilstaps.nl/donate/" target="_blank">http://plugins.camilstaps.nl/donate/</a>.
+			For the options to donate, see <a href="http://wordpress.camilstaps.nl/donate/" target="_blank">http://wordpress.camilstaps.nl/donate/</a>.
 		</div>
 	</div>
 	<div style="width:25%;float:left;margin:0;padding:0;">
