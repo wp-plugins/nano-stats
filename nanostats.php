@@ -3,7 +3,7 @@
 Plugin Name: NaNo Stats
 Plugin URI: http://wordpress.camilstaps.nl/plugins/nano-stats/
 Description: Allows you to show your NaNoWriMo Stats in posts, pages and sidebar widgets.
-Version: 1.2.7
+Version: 1.2.8
 Author: Camil Staps
 Author URI: http://camilstaps.nl
 License: GPL2

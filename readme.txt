@@ -4,7 +4,7 @@ Tags: nanowrimo, statistics, nano, stats, wrimo
 Donate link: http://plugins.camilstaps.nl/donate
 Requires at least: 2.5
 Tested up to: 3.4.1
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,12 +31,18 @@ NaNoWriMo is short for National Novel Writing Month. It is a worldwide contest f
 = My charts and widgets are loading slowly. What can be done about this? =
 I'm afraid this is not an issue of the plugin but of http://nanowrimo.org. During November, this site gets a huge load of data traffic, which causes it to shutdown quiet often during this month. There is nothing that can be done about this, except improving the NaNoWriMo servers.
 
+= Can I use the plugin for Camp NaNoWriMo as well? =
+Unfortunately, [Camp NaNoWriMo](http://www.campnanowrimo.org) does _not_ provide statistics info. So no, you cannot use this plugin with Camp NaNoWriMo - hopefully in the future!
+
 == Screenshots ==
 
 1. With an easy shortcode, you can add this awesome stats chart to your site! Colors, size and title are customizable.
 2. The settings page is clear and simple.
 
 == Changelog ==
+
+= 1.2.8 =
+* Added FAQ about Camp NaNoWriMo
 
 = 1.2.7 =
 * Updated all author links
